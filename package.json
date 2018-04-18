@@ -1,0 +1,16 @@
+{
+  "name": "angular-highcharts-module",
+  "version": "0.0.1",
+  "description": "Angular library seed",
+  "license": "MIT",
+  "author": {
+    "name": "CSL"
+  },
+  "repository": {
+    "type": "git",
+    "url": "csl-intern.local.hcu-hamburg.de:till.degkwitz/angular-highcharts-module.git"
+  },
+  "dependencies": {},
+  "devDependencies": {
+  }
+}
