@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    /* Basic Options */
+    "target": "es5",
+    "module": "commonjs"
+  },
+
+  "files": [
+    "./components/index.ts"
+  ],
+
+  "angularCompilerOptions": {
+    "genDir": "compiled",
+    "debug": true,
+    "skipMetadataEmit" : false,
+    "strictMetadataEmit": true
+  }
+}
