@@ -1,5 +1,5 @@
 {
-  "name": "angular-highcharts-module",
+  "name": "angular-dashboard-module",
   "version": "0.0.1",
   "description": "Angular library seed",
   "license": "MIT",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "csl-intern.local.hcu-hamburg.de:till.degkwitz/angular-highcharts-module.git"
+    "url": "csl-intern.local.hcu-hamburg.de:till.degkwitz/angular-dashboard-components.git"
   },
   "dependencies": {
     "@angular/core": "^5.2.0",
