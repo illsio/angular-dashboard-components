@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { WordCloudComponent } from './word-cloud.component';
+import {} from 'jasmine';
 
 describe('WordCloudComponent', () => {
   let component: WordCloudComponent;
