@@ -10,7 +10,11 @@
     "type": "git",
     "url": "csl-intern.local.hcu-hamburg.de:till.degkwitz/angular-highcharts-module.git"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@angular/core": "^5.2.0",
+    "angular-highcharts": "^5.2.1",
+    "highcharts": "^6.0.4"
+  },
   "devDependencies": {
   }
 }
