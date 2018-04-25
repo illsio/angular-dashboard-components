@@ -5,11 +5,8 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "lib": ["dom", "es6"],
-    "module": "commonjs",
-    "moduleResolution": "node",
     "noEmitOnError": true,
     "noImplicitAny": false,
-    "rootDir": "./components",
     "sourceMap": true,
     "target": "es5",
     "inlineSources": false
