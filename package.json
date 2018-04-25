@@ -16,5 +16,6 @@
     "highcharts": "^6.0.4"
   },
   "devDependencies": {
+    "@types/jasmine": "~2.8.3"
   }
 }
