@@ -1,6 +1,5 @@
 {
   "name": "angular-dashboard-components",
-  "typings": "./components/index.d.ts",
   "version": "0.0.1",
   "description": "Angular library seed",
   "license": "MIT",
@@ -16,5 +15,6 @@
   },
   "devDependencies": {
     "@types/jasmine": "~2.8.3"
-  }
+  },
+  "typings": "lib/index.d.ts"
 }
