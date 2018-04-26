@@ -3,8 +3,10 @@ import {Chart} from 'angular-highcharts';
 
 @Component({
   selector: 'dash-pie',
-  templateUrl: './pie.component.html',
-  styleUrls: ['./pie.component.less']
+    styles: [
+        ''
+    ],
+    template: `<div [chart]="pieChart"></div>`
 })
 export class PieComponent implements OnChanges, OnInit {
 
