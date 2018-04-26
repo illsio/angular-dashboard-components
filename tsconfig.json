@@ -1,10 +1,6 @@
 {
   "compilerOptions": {
     /* Basic Options */
-//    "target": "es5",
-//    "module": "commonjs",
-//    "outDir": "./dist",
-//    "rootDir": "./components"
 
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -14,17 +10,18 @@
     "removeComments": true,
     "sourceMap": true,
     "outDir": "./lib",
-    "declaration": true
+    "declaration": false,
+    "noImplicitAny": false,
+    "noLib": false
   },
 
   "files": [
-    "./components/index.d.ts"
+    "components/index.d.ts"
   ],
 
-  "angularCompilerOptions": {
-    "genDir": "compiled",
-    "debug": true,
-    "skipMetadataEmit" : false,
-    "strictMetadataEmit": true
-  }
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ]
+
 }
