@@ -6,9 +6,9 @@ import * as highC from 'highcharts/js/highcharts.js';
 @Component({
   selector: 'dash-word-cloud',
     styles: [
-        ''
+        '.wCloudHolder {}'
     ],
-    template: `<div [chart]="wordCloudChart"></div>`
+    template: `<div [chart]="wordCloudChart" class="wCloudHolder"></div>`
 })
 export class WordCloudComponent implements OnChanges, OnInit {
 

@@ -4,9 +4,9 @@ import {Chart} from 'angular-highcharts';
 @Component({
   selector: 'dash-pie',
     styles: [
-        ''
+        '.pieHolder {}'
     ],
-    template: `<div [chart]="pieChart"></div>`
+    template: `<div [chart]="pieChart"  class="pieHolder"></div>`
 })
 export class PieComponent implements OnChanges, OnInit {
 

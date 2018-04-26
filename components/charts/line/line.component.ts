@@ -4,9 +4,9 @@ import {Chart} from 'angular-highcharts';
 @Component({
     selector: 'dash-line',
     styles: [
-        'h1 {}'
+        '.lineHolder {}'
     ],
-    template: `<div [chart]="lineChart"></div>`
+    template: `<div [chart]="lineChart" class="lineHolder"></div>`
 })
 export class LineComponent implements OnChanges, OnInit {
 
