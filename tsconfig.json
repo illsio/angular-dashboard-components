@@ -10,13 +10,13 @@
     "removeComments": true,
     "sourceMap": true,
     "outDir": "./lib",
-    "declaration": false,
+    "declaration": true,
     "noImplicitAny": false,
     "noLib": false
   },
 
   "files": [
-    "components/index.d.ts"
+    "components/charts/index.d.ts"
   ],
 
   "exclude": [
