@@ -5,8 +5,10 @@ import * as highC from 'highcharts/js/highcharts.js';
 
 @Component({
   selector: 'dash-word-cloud',
-  templateUrl: './word-cloud.component.html',
-  styleUrls: ['./word-cloud.component.less']
+    styles: [
+        ''
+    ],
+    template: `<div [chart]="wordCloudChart"></div>`
 })
 export class WordCloudComponent implements OnChanges, OnInit {
 
