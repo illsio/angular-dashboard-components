@@ -1,12 +1,10 @@
 {
   "name": "angular-dashboard-components",
-  "typings": "./components/index.ts",
+  "typings": "./components/index.d.ts",
   "version": "0.0.1",
   "description": "Angular library seed",
   "license": "MIT",
-  "author": {
-    "name": "CSL"
-  },
+  "author": "CSL",
   "repository": {
     "type": "git",
     "url": "csl-intern.local.hcu-hamburg.de:till.degkwitz/angular-dashboard-components.git"
@@ -18,5 +16,9 @@
   },
   "devDependencies": {
     "@types/jasmine": "~2.8.3"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
