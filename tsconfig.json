@@ -15,10 +15,6 @@
     "noLib": false
   },
 
-  "files": [
-    "components/charts/index.d.ts"
-  ],
-
   "exclude": [
     "node_modules",
     "**/*.spec.ts"
