@@ -12,8 +12,18 @@
     "outDir": "./lib",
     "declaration": true,
     "noImplicitAny": false,
-    "noLib": false
+    "noLib": false,
+
+
+    "stripInternal": true,
+    "inlineSources": true
+//    "module": "es2015",
+//    "moduleResolution": "node"
   },
+
+  "files": [
+    "components/charts/index.d.ts"
+  ],
 
   "exclude": [
     "node_modules",
