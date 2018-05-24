@@ -1,3 +1,3 @@
 export declare function highchartsModules(): any[];
-export declare class AmazingModule {
+export declare class DashComponentsModule {
 }

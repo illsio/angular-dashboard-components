@@ -28,4 +28,4 @@ export function highchartsModules() {
         {provide: HIGHCHARTS_MODULES, useFactory: highchartsModules }
     ]
 })
-export class AmazingModule {}
+export class DashComponentsModule {}
