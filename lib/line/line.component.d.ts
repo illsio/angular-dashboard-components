@@ -1,4 +1,5 @@
 import { EventEmitter, NgZone, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+export declare function highchartsModules(): any[];
 export declare class LineComponent implements OnChanges, OnInit {
     private zone;
     chartTitle: string;

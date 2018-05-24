@@ -1,6 +1,15 @@
 import {Component, EventEmitter, Input, NgZone, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {Chart} from 'angular-highcharts';
 
+import {ChartModule, HIGHCHARTS_MODULES} from 'angular-highcharts';
+import * as more from 'highcharts/highcharts-more.src';
+import * as exporting from 'highcharts/modules/exporting.src';
+import * as wordcloud from 'highcharts/modules/wordcloud.src';
+
+export function highchartsModules() {
+  return [ more, exporting, wordcloud];
+}
+
 @Component({
     selector: 'dash-line',
     styles: [
