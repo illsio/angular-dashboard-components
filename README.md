@@ -18,8 +18,8 @@ This will build the /lib folder.
         + import * as wordcloud from 'highcharts/modules/wordcloud.src';
         + imports [.., ChartModule, ..]
         + providers [.., {provide: HIGHCHARTS_MODULES, useFactory: highchartsModules }, ..]
+    * npm install angular-highcharts
         
-    
 
  TODO: Sollte wohl zum Modul umgebaut werden, dass es analog zu Libs wie '@angular/material' verwendet werden kann.
- Derzeit werden die Komponenten einzeln als Pfad referenziert.
+ Derzeit werden die Komponenten einzeln als Pfad referenziert. Dadurch sollten die letzteren beiden Punkte für 'usage' obsolet werden!
