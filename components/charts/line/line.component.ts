@@ -19,6 +19,8 @@ export class LineComponent implements OnChanges, OnInit {
     @Input() xTitle = '';
     @Input() legendEnabled = true;
     @Input() isNoGridLines = false;
+    @Input() isColorByPoint= false;
+    @Input() plotLineValue;
 
     // E.G.: xCategories ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     @Input() xCategories = [];
@@ -40,7 +42,9 @@ export class LineComponent implements OnChanges, OnInit {
     }
 
     private getLineChart(series, categories) {
-        let data = (series instanceof Array ? series : [series])
+        series["colorByPoint"] = this.isColorByPoint;
+
+        let data = (series instanceof Array ? series : [series]);
 
         return new Chart({
             chart: {
@@ -65,7 +69,12 @@ export class LineComponent implements OnChanges, OnInit {
                     text: this.yTitle
                 },
                 gridLineWidth: this.isNoGridLines ? 0 : 1,
-                lineWidth: this.isNoGridLines ? 0 : 1
+                lineWidth: this.isNoGridLines ? 0 : 1,
+                plotLines: [{
+                    color: '#FF0000',
+                    width: this.plotLineValue ? 2 : 0,
+                    value: this.plotLineValue ? this.plotLineValue : null
+                }]
             },
             xAxis: {
                 categories: categories,
@@ -102,7 +111,7 @@ export class LineComponent implements OnChanges, OnInit {
 
     chartClick = (event) => {
         this.clickOutput.emit(event);
-    }
+    };
 
 
     ngOnChanges(changes: SimpleChanges) {

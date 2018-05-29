@@ -32,9 +32,10 @@ export class ChartUtils {
     *   @seriesIdent is the name of the series (e.g. 'bezirke') - could be passed as an array, but does it make sense?
     *   @dataElements contain the element values of the series (e.g. [2011, 2012, ...]) to also insert NULL values for blanks
     *   @seriesPointIdent is the corresponding series identification (e.g. 'years')
+    *   @highlight name of the series to highlight in the chart
     */
 
-    getSeriesData(data: Object[], seriesIdent: string, dataIdent, seriesPointIdent, seriesPointElements: string[]) {
+    getSeriesData(data: Object[], seriesIdent: string, dataIdent, seriesPointIdent, seriesPointElements: string[], highlight?: string) {
         let dataArray = [];
         let seriesNames = this.getUniqueSeriesNames(data, [seriesIdent]);
 
@@ -58,6 +59,10 @@ export class ChartUtils {
                 if (!found) {
                     seriesData.push(null);
                 }
+            }
+
+            if (series.name == highlight) {
+                series["color"] = '#434348';
             }
 
             // In this case we only have one Series (in this case the )
