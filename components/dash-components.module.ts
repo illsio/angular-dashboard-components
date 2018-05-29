@@ -14,7 +14,7 @@ export function highchartsModules() {
     declarations: [
         LineComponent,
         PieComponent,
-        WordCloudComponent
+        WordCloudComponent,
     ],
     imports: [
         ChartModule

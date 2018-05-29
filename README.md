@@ -10,7 +10,8 @@ This will build the /lib folder.
 
 - For usage in other projects:
     * in the package.json: 
-        + "angular-dashboard-components": "git+ssh://git@csl-intern.local.hcu-hamburg.de:till.degkwitz/angular-dashboard-components.git"
+        + Dependencies: "angular-dashboard-components": "git+ssh://git@csl-intern.local.hcu-hamburg.de:till.degkwitz/angular-dashboard-components.git"
+        + DevDependencies: "@types/highcharts": "^5.0.18"
     * in the app.module:
         + import {ChartModule, HIGHCHARTS_MODULES} from 'angular-highcharts';
         + import * as more from 'highcharts/highcharts-more.src';

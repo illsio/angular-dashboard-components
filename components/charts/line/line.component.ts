@@ -39,6 +39,8 @@ export class LineComponent implements OnChanges, OnInit {
     }
 
     private getLineChart(series, categories) {
+        let data = (series instanceof Array ? series : [series])
+
         return new Chart({
             chart: {
                 plotBackgroundColor: null,
@@ -85,7 +87,7 @@ export class LineComponent implements OnChanges, OnInit {
                     },
                 },
             },
-            series: [series]
+            series: data
         });
     }
 

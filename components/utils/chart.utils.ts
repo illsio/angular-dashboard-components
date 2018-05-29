@@ -4,114 +4,150 @@ import {DataFunctionEnum} from "../enum/data-function.enum";
 @Injectable()
 export class ChartUtils {
 
-  constructor() {}
+    constructor() {
+    }
 
-  /*
-  *   We feed these methods JSON data and it generates the chart-series
-  */
+    /*
+    *   We feed these methods JSON data and it generates the chart-series
+    */
 
-  getCountData(data: Object[], seriesIdent: string[]) {
-    return this.getDataByFunction(data, seriesIdent, DataFunctionEnum.COUNT);
-  }
+    getCountData(data: Object[], seriesIdent: string[]) {
+        return this.getDataByFunction(data, seriesIdent, DataFunctionEnum.COUNT);
+    }
 
-  getSumData(data: Object[], seriesIdent: string[], dataIdent) {
-    return this.getDataByFunction(data, seriesIdent, DataFunctionEnum.SUM, dataIdent);
-  }
+    getSumData(data: Object[], seriesIdent: string[], dataIdent) {
+        return this.getDataByFunction(data, seriesIdent, DataFunctionEnum.SUM, dataIdent);
+    }
 
-  getMinData(data: Object[], seriesIdent: string[], dataIdent) {
-    return this.getDataByFunction(data, seriesIdent, DataFunctionEnum.MINIMUM, dataIdent);
-  }
+    getMinData(data: Object[], seriesIdent: string[], dataIdent) {
+        return this.getDataByFunction(data, seriesIdent, DataFunctionEnum.MINIMUM, dataIdent);
+    }
 
-  getMaxData(data: Object[], seriesIdent: string[], dataIdent) {
-    return this.getDataByFunction(data, seriesIdent, DataFunctionEnum.MAXIMUM, dataIdent);
-  }
+    getMaxData(data: Object[], seriesIdent: string[], dataIdent) {
+        return this.getDataByFunction(data, seriesIdent, DataFunctionEnum.MAXIMUM, dataIdent);
+    }
 
-  private getDataByFunction(data: Object[], seriesIdent: string[], calcFunction: DataFunctionEnum, dataIdentity?: string) {
-    let dataArray = {};
-    dataArray['name'] = seriesIdent;
+    /*
+    *   @seriesIdent is the name of the series (e.g. 'bezirke')
+    *   @dataElements contain the element values of the series (e.g. [2011, 2012, ...]) to also insert NULL values for blanks
+    *   @seriesPointIdent is the corresponding series identification (e.g. 'years')
+    */
 
-    let seriesCollection = [];
-    let seriesNames = this.getUniqueSeriesNames(data, seriesIdent);
+    getSeriesData(data: Object[], seriesIdent: string[], dataIdent, seriesPointIdent, seriesPointElements: string[]) {
+        let dataArray = [];
+        let seriesNames = this.getUniqueSeriesNames(data, seriesIdent);
 
-    for (let uniqueName of seriesNames) {
-      let series = {name: uniqueName};
-      let dataFunction: number;
-      for (let obj of data) {
-        if (this.getElementNameAtLevel(seriesIdent, obj) === uniqueName) {
-          let dataElement = Number(obj[dataIdentity]);
+        for (let uniqueName of seriesNames) {
+            let series = {name: uniqueName};
+            let seriesData = [];
 
-          if (calcFunction === DataFunctionEnum.COUNT ||
-              calcFunction === DataFunctionEnum.SUM) {
-            if (!dataFunction) {
-              dataFunction = 0;
+            for (let seriesPoint of seriesPointElements) {
+                let found = true;
+
+                for (let obj of data) {
+                    if (obj[seriesPointIdent] === seriesPoint &&
+                        this.getElementNameAtLevel(seriesIdent, obj) === uniqueName) {
+
+                        seriesData.push(Number(obj[dataIdent]));
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    seriesData.push(null);
+                }
             }
-          }
-          if (calcFunction === DataFunctionEnum.COUNT) {
-            dataFunction++;
-          } else if (calcFunction === DataFunctionEnum.SUM) {
-            dataFunction = dataFunction + dataElement;
-          } else if (calcFunction === DataFunctionEnum.MAXIMUM) {
-            if (!dataFunction) {
-              dataFunction = dataElement;
-            } else {
-              dataFunction = dataElement > dataFunction ? dataElement : dataFunction;
-            }
-          } else if (calcFunction === DataFunctionEnum.MINIMUM) {
-            if (!dataFunction) {
-              dataFunction = dataElement;
-            } else {
-              dataFunction = dataElement < dataFunction ? dataElement : dataFunction;
-            }
-          }
+            series["data"] = seriesData;
+            dataArray.push(series);
         }
-      }
-
-      series['y'] = dataFunction;
-      seriesCollection.push(series);
+        return dataArray;
     }
 
-    dataArray['data'] = seriesCollection;
-    return dataArray;
-  }
+    private getDataByFunction(data: Object[], seriesIdent: string[], calcFunction: DataFunctionEnum, dataIdentity?: string) {
+        let dataArray = {};
+        dataArray['name'] = seriesIdent;
 
+        let seriesCollection = [];
+        let seriesNames = this.getUniqueSeriesNames(data, seriesIdent);
 
+        for (let uniqueName of seriesNames) {
+            let series = {name: uniqueName};
+            let dataFunction: number;
+            for (let obj of data) {
+                if (this.getElementNameAtLevel(seriesIdent, obj) === uniqueName) {
+                    let dataElement = Number(obj[dataIdentity]);
 
-  /*
-  *   Helper methods
-  */
+                    if (calcFunction === DataFunctionEnum.COUNT ||
+                        calcFunction === DataFunctionEnum.SUM) {
+                        if (!dataFunction) {
+                            dataFunction = 0;
+                        }
+                    }
+                    if (calcFunction === DataFunctionEnum.COUNT) {
+                        dataFunction++;
+                    } else if (calcFunction === DataFunctionEnum.SUM) {
+                        dataFunction = dataFunction + dataElement;
+                    } else if (calcFunction === DataFunctionEnum.MAXIMUM) {
+                        if (!dataFunction) {
+                            dataFunction = dataElement;
+                        } else {
+                            dataFunction = dataElement > dataFunction ? dataElement : dataFunction;
+                        }
+                    } else if (calcFunction === DataFunctionEnum.MINIMUM) {
+                        if (!dataFunction) {
+                            dataFunction = dataElement;
+                        } else {
+                            dataFunction = dataElement < dataFunction ? dataElement : dataFunction;
+                        }
+                    }
+                }
+            }
 
-  public getUniqueSeriesNames(data: Object[], seriesIdent: string[]) {
-    let seriesNames = [];
-    for (let obj of data) {
-      let currentSeriesName = this.getElementNameAtLevel(seriesIdent, obj);
-      if (seriesNames.indexOf(currentSeriesName) === -1) {
-        // It does not exist yet
-        seriesNames.push(currentSeriesName);
-      }
+            series['y'] = dataFunction;
+            seriesCollection.push(series);
+        }
+
+        dataArray['data'] = seriesCollection;
+        return dataArray;
     }
-    return seriesNames;
-  }
 
-  private getElementNameAtLevel(seriesIdent: string[], obj) {
-    let latestElement;
-    for (let sIdent of seriesIdent) {
-      latestElement = latestElement ? latestElement : obj;
-      if (latestElement[sIdent] instanceof Array) {
-        latestElement = latestElement[sIdent][0];
-      } else {
-        latestElement = latestElement[sIdent];
-      }
+
+    /*
+    *   Helper methods
+    */
+
+    public getUniqueSeriesNames(data: Object[], seriesIdent: string[]) {
+        let seriesNames = [];
+        for (let obj of data) {
+            let currentSeriesName = this.getElementNameAtLevel(seriesIdent, obj);
+            if (seriesNames.indexOf(currentSeriesName) === -1) {
+                // It does not exist yet
+                seriesNames.push(currentSeriesName);
+            }
+        }
+        return seriesNames;
     }
 
-    let currentSeriesName = latestElement;
-    return currentSeriesName;
-  }
+    private getElementNameAtLevel(seriesIdent: string[], obj) {
+        let latestElement;
+        for (let sIdent of seriesIdent) {
+            latestElement = latestElement ? latestElement : obj;
+            if (latestElement[sIdent] instanceof Array) {
+                latestElement = latestElement[sIdent][0];
+            } else {
+                latestElement = latestElement[sIdent];
+            }
+        }
 
-  public concatAllElements(textArr: string[]): string {
-    let concatenated = '';
-    for (let text of textArr) {
-      concatenated = concatenated.concat(' ' + text);
+        let currentSeriesName = latestElement;
+        return currentSeriesName;
     }
-    return concatenated;
-  }
+
+    public concatAllElements(textArr: string[]): string {
+        let concatenated = '';
+        for (let text of textArr) {
+            concatenated = concatenated.concat(' ' + text);
+        }
+        return concatenated;
+    }
 }
