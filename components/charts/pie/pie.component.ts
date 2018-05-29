@@ -12,6 +12,7 @@ export class PieComponent implements OnChanges, OnInit {
 
     @Input() chartTitle = '';
     @Input() isPercentageLabel = true;
+    @Input() dataLabelDistance = 30;
 
     // E.G. Series:
     // [{name: 'Brands', data: [{name: 'IE', y: 56.33}, {name: 'Chrome', y: 24.03}]}]
@@ -20,8 +21,7 @@ export class PieComponent implements OnChanges, OnInit {
 
     @Output() clickOutput = new EventEmitter<string []>();
 
-    constructor(private zone: NgZone) {
-    }
+    constructor(private zone: NgZone) { }
 
     ngOnInit() {
         this.pieChart = this.getPieChart(this.series);
@@ -50,7 +50,8 @@ export class PieComponent implements OnChanges, OnInit {
                     cursor: 'pointer',
                     dataLabels: {
                         enabled: true,
-                        format: this.isPercentageLabel ? '<b>{point.name}</b>: {point.percentage:.1f} %' : '<b>{point.name}</b>: {point.y:.2f}'
+                        format: this.isPercentageLabel ? '<b>{point.name}</b>: {point.percentage:.1f} %' : '<b>{point.name}</b>: {point.y:.2f}',
+                        distance: this.dataLabelDistance,
                         /*,
                       style: {
                         color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'

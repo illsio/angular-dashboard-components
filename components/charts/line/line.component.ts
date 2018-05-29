@@ -18,6 +18,7 @@ export class LineComponent implements OnChanges, OnInit {
     @Input() yTitle = '';
     @Input() xTitle = '';
     @Input() legendEnabled = true;
+    @Input() isNoGridLines = false;
 
     // E.G.: xCategories ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     @Input() xCategories = [];
@@ -62,13 +63,17 @@ export class LineComponent implements OnChanges, OnInit {
             yAxis: {
                 title: {
                     text: this.yTitle
-                }
+                },
+                gridLineWidth: this.isNoGridLines ? 0 : 1,
+                lineWidth: this.isNoGridLines ? 0 : 1
             },
             xAxis: {
                 categories: categories,
                 title: {
                     text: this.yTitle
-                }
+                },
+                tickWidth: this.isNoGridLines ? 0 : 1,
+                lineWidth: this.isNoGridLines ? 0 : 1
             },
             legend: {
                 enabled: this.legendEnabled,
