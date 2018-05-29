@@ -27,15 +27,16 @@ export class ChartUtils {
         return this.getDataByFunction(data, seriesIdent, DataFunctionEnum.MAXIMUM, dataIdent);
     }
 
+
     /*
-    *   @seriesIdent is the name of the series (e.g. 'bezirke')
+    *   @seriesIdent is the name of the series (e.g. 'bezirke') - could be passed as an array, but does it make sense?
     *   @dataElements contain the element values of the series (e.g. [2011, 2012, ...]) to also insert NULL values for blanks
     *   @seriesPointIdent is the corresponding series identification (e.g. 'years')
     */
 
-    getSeriesData(data: Object[], seriesIdent: string[], dataIdent, seriesPointIdent, seriesPointElements: string[]) {
+    getSeriesData(data: Object[], seriesIdent: string, dataIdent, seriesPointIdent, seriesPointElements: string[]) {
         let dataArray = [];
-        let seriesNames = this.getUniqueSeriesNames(data, seriesIdent);
+        let seriesNames = this.getUniqueSeriesNames(data, [seriesIdent]);
 
         for (let uniqueName of seriesNames) {
             let series = {name: uniqueName};
@@ -46,21 +47,36 @@ export class ChartUtils {
 
                 for (let obj of data) {
                     if (obj[seriesPointIdent] === seriesPoint &&
-                        this.getElementNameAtLevel(seriesIdent, obj) === uniqueName) {
+                        this.getElementNameAtLevel([seriesIdent], obj) === uniqueName) {
 
                         seriesData.push(Number(obj[dataIdent]));
                         found = true;
                         break;
                     }
                 }
+
                 if (!found) {
                     seriesData.push(null);
                 }
             }
-            series["data"] = seriesData;
+
+            // In this case we only have one Series (in this case the )
+            if (seriesPointElements.length == 1) {
+                series["y"] = seriesData[0];
+            } else {
+                series["data"] = seriesData;
+            }
             dataArray.push(series);
         }
-        return dataArray;
+
+        if (seriesPointElements.length == 1) {
+            let newDataArray = {};
+            newDataArray["data"] = dataArray;
+            newDataArray["name"] = [seriesIdent];
+            return newDataArray
+        } else {
+            return dataArray;
+        }
     }
 
     private getDataByFunction(data: Object[], seriesIdent: string[], calcFunction: DataFunctionEnum, dataIdentity?: string) {
