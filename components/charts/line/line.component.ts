@@ -12,6 +12,7 @@ export class LineComponent implements OnChanges, OnInit {
 
     // Titles
     @Input() chartTitle = '';
+    @Input() chartSubTitle = '';
 
     // Column or line as type
     @Input() chartType = '';
@@ -63,6 +64,9 @@ export class LineComponent implements OnChanges, OnInit {
             },
             title: {
                 text: this.chartTitle
+            },
+            subtitle: {
+                text: this.chartSubTitle
             },
             yAxis: {
                 title: {

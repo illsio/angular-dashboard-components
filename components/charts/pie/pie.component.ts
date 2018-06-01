@@ -11,7 +11,10 @@ import {Chart} from 'angular-highcharts';
 export class PieComponent implements OnChanges, OnInit {
 
     @Input() chartTitle = '';
+    @Input() chartSubTitle = '';
+
     @Input() isPercentageLabel = true;
+    @Input() isNoDecimalPlace = false;
     @Input() dataLabelDistance = 30;
 
     // E.G. Series:
@@ -38,6 +41,9 @@ export class PieComponent implements OnChanges, OnInit {
             title: {
                 text: this.chartTitle
             },
+            subtitle: {
+                text: this.chartSubTitle
+            },
             // tooltip: {
             //   pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
             // },
@@ -50,7 +56,8 @@ export class PieComponent implements OnChanges, OnInit {
                     cursor: 'pointer',
                     dataLabels: {
                         enabled: true,
-                        format: this.isPercentageLabel ? '<b>{point.name}</b>: {point.percentage:.1f} %' : '<b>{point.name}</b>: {point.y:.2f}',
+                        format: this.isPercentageLabel ? '<b>{point.name}</b>: {point.percentage:.1f} %'
+                            : this.isNoDecimalPlace ? '<b>{point.name}</b>: {point.y:.0f}' : '<b>{point.name}</b>: {point.y:.2f}',
                         distance: this.dataLabelDistance,
                         /*,
                       style: {
