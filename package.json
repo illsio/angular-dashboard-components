@@ -1,6 +1,6 @@
 {
   "name": "angular-dashboard-components",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Angular library seed",
   "license": "MIT",
   "author": "CSL",
@@ -9,7 +9,7 @@
     "url": "csl-intern.local.hcu-hamburg.de:till.degkwitz/angular-dashboard-components.git"
   },
   "dependencies": {
-    "@angular/core": "^5.2.0",
+    "@angular/core": "^5.2.11",
     "angular-highcharts": "^5.2.1",
     "highcharts": "^6.0.4"
   },
