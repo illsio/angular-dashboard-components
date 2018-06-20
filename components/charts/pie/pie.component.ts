@@ -10,12 +10,16 @@ import {Chart} from 'angular-highcharts';
 })
 export class PieComponent implements OnChanges, OnInit {
 
+    // Titles
     @Input() chartTitle = '';
     @Input() chartSubTitle = '';
+    @Input() chartTitleAlign = 'center';
 
     @Input() isPercentageLabel = true;
     @Input() isNoDecimalPlace = false;
     @Input() dataLabelDistance = 30;
+
+    @Input() innerSize = 0;
 
     // E.G. Series:
     // [{name: 'Brands', data: [{name: 'IE', y: 56.33}, {name: 'Chrome', y: 24.03}]}]
@@ -28,6 +32,9 @@ export class PieComponent implements OnChanges, OnInit {
 
     ngOnInit() {
         this.pieChart = this.getPieChart(this.series);
+        if (this.innerSize> 0) {
+            this.series['innerSize'] = this.innerSize;
+        }
     }
 
     private getPieChart(series) {
@@ -39,7 +46,8 @@ export class PieComponent implements OnChanges, OnInit {
                 type: 'pie'
             },
             title: {
-                text: this.chartTitle
+                text: this.chartTitle,
+                align: this.chartTitleAlign
             },
             subtitle: {
                 text: this.chartSubTitle

@@ -13,15 +13,18 @@ export class LineComponent implements OnChanges, OnInit {
     // Titles
     @Input() chartTitle = '';
     @Input() chartSubTitle = '';
+    @Input() chartTitleAlign = 'center';
 
     // Column or line as type
-    @Input() chartType = '';
+    @Input() chartType = 'line';
     @Input() yTitle = '';
     @Input() xTitle = '';
+
     @Input() legendEnabled = true;
-    @Input() isNoGridLines = false;
     @Input() isColorByPoint= false;
+
     @Input() plotLineValue;
+    @Input() isNoGridLines = false;
 
     // E.G.: xCategories ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     @Input() xCategories = [];
@@ -63,7 +66,8 @@ export class LineComponent implements OnChanges, OnInit {
                 },
             },
             title: {
-                text: this.chartTitle
+                text: this.chartTitle,
+                align: this.chartTitleAlign
             },
             subtitle: {
                 text: this.chartSubTitle
