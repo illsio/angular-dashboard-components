@@ -1,14 +1,21 @@
-import {Component, EventEmitter, Input, NgZone, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, NgZone, OnChanges, OnInit, Output, SimpleChanges, AfterViewChecked} from '@angular/core';
 import {Chart} from 'angular-highcharts';
 
 @Component({
     selector: 'dash-line',
     styles: [
-        '.lineHolder {}'
+        '.lineHolder {height: 100%}'
     ],
-    template: `<div [chart]="lineChart" class="lineHolder"></div>`
+    template: `<div [chart]="lineChart" class="lineHolder"  id="{{lineId}}"></div>`
 })
-export class LineComponent implements OnChanges, OnInit {
+export class LineComponent implements OnChanges, OnInit, AfterViewChecked {
+
+
+    /*
+    *   To assure good height adjustation, please give the parent containers a 'height: 100%'
+    */
+    // lineId = Math.random().toString(36).substring(2, 15);
+    @Input() lineId:string;
 
     // Titles
     @Input() chartTitle = '';
@@ -21,7 +28,8 @@ export class LineComponent implements OnChanges, OnInit {
     @Input() xTitle = '';
 
     @Input() legendEnabled = true;
-    @Input() isColorByPoint= false;
+    @Input() isColorByPoint = false;
+    @Input() isExport = true;
 
     @Input() plotLineValue;
     @Input() isNoGridLines = false;
@@ -45,8 +53,11 @@ export class LineComponent implements OnChanges, OnInit {
         this.lineChart = this.getLineChart(this.series, this.xCategories);
     }
 
+    ngAfterViewChecked() {
+    }
+
     private getLineChart(series, categories) {
-        series["colorByPoint"] = this.isColorByPoint;
+        series['colorByPoint'] = this.isColorByPoint;
 
         let data = (series instanceof Array ? series : [series]);
 
@@ -55,10 +66,11 @@ export class LineComponent implements OnChanges, OnInit {
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
                 plotShadow: false,
-                type: this.chartType
+                type: this.chartType,
+                renderTo: document.getElementById(this.lineId)
             },
             exporting: {
-                enabled: true,
+                enabled: this.isExport,
                 buttons: {
                     contextButton: {
                         enabled: true
@@ -89,6 +101,9 @@ export class LineComponent implements OnChanges, OnInit {
                 title: {
                     text: this.yTitle
                 },
+                labels: {
+                    autoRotationLimit: 0
+                },
                 tickWidth: this.isNoGridLines ? 0 : 1,
                 lineWidth: this.isNoGridLines ? 0 : 1
             },
@@ -111,6 +126,14 @@ export class LineComponent implements OnChanges, OnInit {
             },
             series: data
         });
+    }
+
+    public redrawChart(isReflow) {
+        if (isReflow) {
+            this.lineChart.ref.reflow();
+        } else {
+            this.lineChart = this.getLineChart(this.series, this.xCategories);
+        }
     }
 
     /*

@@ -4,20 +4,28 @@ import {Chart} from 'angular-highcharts';
 @Component({
     selector: 'dash-pie',
     styles: [
-        '.pieHolder {}'
+        '.pieHolder {height: 100%}'
     ],
-    template: `<div [chart]="pieChart"  class="pieHolder"></div>`
+    template: `<div [chart]="pieChart" class="pieHolder" id="{{pieId}}"></div>`
 })
 export class PieComponent implements OnChanges, OnInit {
+
+    /*
+    *   To assure good height adjustation, please give the parent containers a 'height: 100%'
+    */
+    // pieId = Math.random().toString(36).substring(2, 15);
+    @Input() pieId:string;
 
     // Titles
     @Input() chartTitle = '';
     @Input() chartSubTitle = '';
     @Input() chartTitleAlign = 'center';
 
+    @Input() isShowLabels = true;
     @Input() isPercentageLabel = true;
     @Input() isNoDecimalPlace = false;
     @Input() dataLabelDistance = 30;
+    @Input() isExport = true;
 
     @Input() innerSize = 0;
 
@@ -28,11 +36,12 @@ export class PieComponent implements OnChanges, OnInit {
 
     @Output() clickOutput = new EventEmitter<string []>();
 
-    constructor(private zone: NgZone) { }
+    constructor(private zone: NgZone) {
+    }
 
     ngOnInit() {
         this.pieChart = this.getPieChart(this.series);
-        if (this.innerSize> 0) {
+        if (this.innerSize > 0) {
             this.series['innerSize'] = this.innerSize;
         }
     }
@@ -43,7 +52,16 @@ export class PieComponent implements OnChanges, OnInit {
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
                 plotShadow: false,
-                type: 'pie'
+                type: 'pie',
+                renderTo: document.getElementById(this.pieId)
+            },
+            exporting: {
+                enabled: this.isExport,
+                buttons: {
+                    contextButton: {
+                        enabled: true
+                    },
+                },
             },
             title: {
                 text: this.chartTitle,
@@ -60,10 +78,11 @@ export class PieComponent implements OnChanges, OnInit {
             },
             plotOptions: {
                 pie: {
+                    center: ['50%', '50%'],
                     allowPointSelect: true,
                     cursor: 'pointer',
                     dataLabels: {
-                        enabled: true,
+                        enabled: this.isShowLabels,
                         format: this.isPercentageLabel ? '<b>{point.name}</b>: {point.percentage:.1f} %'
                             : this.isNoDecimalPlace ? '<b>{point.name}</b>: {point.y:.0f}' : '<b>{point.name}</b>: {point.y:.2f}',
                         distance: this.dataLabelDistance,
@@ -84,13 +103,22 @@ export class PieComponent implements OnChanges, OnInit {
         });
     }
 
+    public redrawChart(isReflow) {
+        if (isReflow) {
+            this.pieChart.ref.reflow();
+        } else {
+            this.pieChart = this.getPieChart(this.series);
+        }
+    }
+
+
     /*
     *   Selecting elements on charts or from the outside, will also alter the selected filter elements
     */
 
     chartClick = (event) => {
         this.clickOutput.emit(event);
-    }
+    };
 
     ngOnChanges(changes: SimpleChanges) {
         if (changes['series'] && !changes['series'].firstChange) {
