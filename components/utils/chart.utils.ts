@@ -171,4 +171,18 @@ export class ChartUtils {
         }
         return concatenated;
     }
+
+    public capitalize(value: any): string {
+        let string = '';
+        if (value instanceof Array) {
+            string = value[0].name;
+        } else if (typeof value === 'object') {
+            string = value.name[0];
+        } else {
+            string = value.name;
+        }
+
+
+        return string.charAt(0).toUpperCase() + string.slice(1)
+    }
 }

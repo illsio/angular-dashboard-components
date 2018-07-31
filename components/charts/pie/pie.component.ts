@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, NgZone, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {Chart} from 'angular-highcharts';
+import {ChartUtils} from '../../utils/chart.utils';
 
 @Component({
     selector: 'dash-pie',
@@ -36,7 +37,8 @@ export class PieComponent implements OnChanges, OnInit {
 
     @Output() clickOutput = new EventEmitter<string []>();
 
-    constructor(private zone: NgZone) {
+    constructor(private zone: NgZone,
+                private chartUtils: ChartUtils) {
     }
 
     ngOnInit() {
@@ -70,9 +72,9 @@ export class PieComponent implements OnChanges, OnInit {
             subtitle: {
                 text: this.chartSubTitle
             },
-            // tooltip: {
-            //   pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-            // },
+            tooltip: {
+                pointFormat: this.chartUtils.capitalize(series) + ': <b>{point.y}</b>'
+            },
             credits: {
                 enabled: false
             },

@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, NgZone, OnChanges, OnInit, Output, SimpleChanges, AfterViewChecked} from '@angular/core';
 import {Chart} from 'angular-highcharts';
+import {ChartUtils} from '../../utils/chart.utils';
 
 @Component({
     selector: 'dash-line',
@@ -26,6 +27,9 @@ export class LineComponent implements OnChanges, OnInit, AfterViewChecked {
     @Input() chartType = 'line';
     @Input() yTitle = '';
     @Input() xTitle = '';
+    @Input() isShowYAxis = true;
+
+    @Input() pointStart = null;
 
     @Input() legendEnabled = true;
     @Input() isColorByPoint = false;
@@ -46,7 +50,8 @@ export class LineComponent implements OnChanges, OnInit, AfterViewChecked {
 
     public lineChart;
 
-    constructor(private zone: NgZone) {
+    constructor(private zone: NgZone,
+                private chartUtils: ChartUtils) {
     }
 
     ngOnInit() {
@@ -84,7 +89,11 @@ export class LineComponent implements OnChanges, OnInit, AfterViewChecked {
             subtitle: {
                 text: this.chartSubTitle
             },
+            tooltip: {
+                pointFormat: this.chartUtils.capitalize(series) + ': <b>{point.y}</b>'
+            },
             yAxis: {
+                visible: this.isShowYAxis,
                 title: {
                     text: this.yTitle
                 },
