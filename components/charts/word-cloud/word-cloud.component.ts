@@ -57,7 +57,7 @@ export class WordCloudComponent implements OnChanges, OnInit {
 
   private createDataFromText(text: string) {
     let lines = text.split(/[,\. ]+/g);
-    let realLines = [];
+    let realLines: any[] = [];
     for (let line of lines) {
       if (line && line.length > 3) {
         realLines.push(line);
@@ -81,7 +81,7 @@ export class WordCloudComponent implements OnChanges, OnInit {
     }, []);
 
     if (this.minOccurences) {
-      let filteredData = [];
+      let filteredData: any[] = [];
       for (let wordElement of data) {
         if (wordElement['weight'] > this.minOccurences) {
           filteredData.push(wordElement);

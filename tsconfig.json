@@ -26,6 +26,7 @@
   },
 
   "files": [
+    "components/charts/index.d.ts",
     "components/utils/chart.utils.ts"
   ],
 

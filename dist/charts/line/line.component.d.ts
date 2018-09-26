@@ -1,0 +1,31 @@
+import { EventEmitter, NgZone, OnChanges, OnInit, SimpleChanges, AfterViewChecked } from '@angular/core';
+import { ChartUtils } from '../../utils/chart.utils';
+export declare class LineComponent implements OnChanges, OnInit, AfterViewChecked {
+    private zone;
+    private chartUtils;
+    lineId: string;
+    chartTitle: string;
+    chartSubTitle: string;
+    chartTitleAlign: string;
+    chartType: string;
+    yTitle: string;
+    xTitle: string;
+    isShowYAxis: boolean;
+    pointStart: null;
+    legendEnabled: boolean;
+    isColorByPoint: boolean;
+    isExport: boolean;
+    plotLineValue: any;
+    isNoGridLines: boolean;
+    xCategories: never[];
+    series: any;
+    clickOutput: EventEmitter<string[]>;
+    lineChart: any;
+    constructor(zone: NgZone, chartUtils: ChartUtils);
+    ngOnInit(): void;
+    ngAfterViewChecked(): void;
+    private getLineChart(series, categories);
+    redrawChart(isReflow: any): void;
+    chartClick: (event: any) => void;
+    ngOnChanges(changes: SimpleChanges): void;
+}

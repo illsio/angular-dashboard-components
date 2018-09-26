@@ -16,7 +16,7 @@ export class LineComponent implements OnChanges, OnInit, AfterViewChecked {
     *   To assure good height adjustation, please give the parent containers a 'height: 100%'
     */
     // lineId = Math.random().toString(36).substring(2, 15);
-    @Input() lineId:string;
+    @Input() lineId: string = '';
 
     // Titles
     @Input() chartTitle = '';
@@ -63,16 +63,16 @@ export class LineComponent implements OnChanges, OnInit, AfterViewChecked {
 
     private getLineChart(series, categories) {
         series['colorByPoint'] = this.isColorByPoint;
-
         let data = (series instanceof Array ? series : [series]);
+        let renderTo: any = document.getElementById(this.lineId) ? document.getElementById(this.lineId) : new HTMLElement();
 
         return new Chart({
             chart: {
-                plotBackgroundColor: null,
-                plotBorderWidth: null,
+                plotBackgroundColor: undefined,
+                plotBorderWidth: undefined,
                 plotShadow: false,
                 type: this.chartType,
-                renderTo: document.getElementById(this.lineId)
+                renderTo: renderTo
             },
             exporting: {
                 enabled: this.isExport,

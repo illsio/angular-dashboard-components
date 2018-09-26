@@ -15,7 +15,7 @@ export class PieComponent implements OnChanges, OnInit {
     *   To assure good height adjustation, please give the parent containers a 'height: 100%'
     */
     // pieId = Math.random().toString(36).substring(2, 15);
-    @Input() pieId:string;
+    @Input() pieId: string = '';
 
     // Titles
     @Input() chartTitle = '';
@@ -49,13 +49,14 @@ export class PieComponent implements OnChanges, OnInit {
     }
 
     private getPieChart(series) {
+        let renderTo: any = document.getElementById(this.pieId) ? document.getElementById(this.pieId) : new HTMLElement();
         return new Chart({
             chart: {
-                plotBackgroundColor: null,
-                plotBorderWidth: null,
+                plotBackgroundColor: undefined,
+                plotBorderWidth: undefined,
                 plotShadow: false,
                 type: 'pie',
-                renderTo: document.getElementById(this.pieId)
+                renderTo: renderTo
             },
             exporting: {
                 enabled: this.isExport,
