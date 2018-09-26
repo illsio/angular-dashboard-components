@@ -42,7 +42,7 @@ var LineComponent = (function () {
     LineComponent.prototype.getLineChart = function (series, categories) {
         series['colorByPoint'] = this.isColorByPoint;
         var data = (series instanceof Array ? series : [series]);
-        var renderTo = document.getElementById(this.lineId) ? document.getElementById(this.lineId) : new HTMLElement();
+        var renderTo = document.getElementById(this.lineId);
         return new Chart({
             chart: {
                 plotBackgroundColor: undefined,

@@ -37,7 +37,7 @@ var PieComponent = (function () {
         }
     };
     PieComponent.prototype.getPieChart = function (series) {
-        var renderTo = document.getElementById(this.pieId) ? document.getElementById(this.pieId) : new HTMLElement();
+        var renderTo = document.getElementById(this.pieId);
         return new Chart({
             chart: {
                 plotBackgroundColor: undefined,

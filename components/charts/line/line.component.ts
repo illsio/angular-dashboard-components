@@ -64,7 +64,7 @@ export class LineComponent implements OnChanges, OnInit, AfterViewChecked {
     private getLineChart(series, categories) {
         series['colorByPoint'] = this.isColorByPoint;
         let data = (series instanceof Array ? series : [series]);
-        let renderTo: any = document.getElementById(this.lineId) ? document.getElementById(this.lineId) : new HTMLElement();
+        let renderTo: any = document.getElementById(this.lineId);
 
         return new Chart({
             chart: {

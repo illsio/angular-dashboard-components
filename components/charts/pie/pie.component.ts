@@ -49,7 +49,7 @@ export class PieComponent implements OnChanges, OnInit {
     }
 
     private getPieChart(series) {
-        let renderTo: any = document.getElementById(this.pieId) ? document.getElementById(this.pieId) : new HTMLElement();
+        let renderTo: any = document.getElementById(this.pieId);
         return new Chart({
             chart: {
                 plotBackgroundColor: undefined,
