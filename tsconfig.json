@@ -5,24 +5,28 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "target": "es5",
-    "module": "commonjs",
+//    "module": "commonjs",
     "moduleResolution": "node",
     "removeComments": true,
     "sourceMap": true,
-    "outDir": "./lib",
+    "outDir": "./dist",
     "declaration": true,
     "noImplicitAny": false,
-    "noLib": false,
+//    "noLib": false,
 
 
     "stripInternal": true,
-    "inlineSources": true
-//    "module": "es2015",
+    "inlineSources": true,
+    "module": "es2015",
 //    "moduleResolution": "node"
+
+    "strict": true,
+    "lib": ["es2015", "dom"]
+
   },
 
   "files": [
-    "components/charts/index.d.ts"
+    "components/utils/chart.utils.ts"
   ],
 
   "exclude": [

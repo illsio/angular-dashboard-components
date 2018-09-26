@@ -36,12 +36,12 @@ export class ChartUtils {
     */
 
     getSeriesData(data: Object[], seriesIdent: string, dataIdent, seriesPointIdent, seriesPointElements: string[], highlight?: string) {
-        let dataArray = [];
+        let dataArray: any[] = [];
         let seriesNames = this.getUniqueSeriesNames(data, [seriesIdent]);
 
         for (let uniqueName of seriesNames) {
             let series = {name: uniqueName};
-            let seriesData = [];
+            let seriesData: any[] = [];
 
             for (let seriesPoint of seriesPointElements) {
                 let found = true;
@@ -88,15 +88,16 @@ export class ChartUtils {
         let dataArray = {};
         dataArray['name'] = seriesIdent;
 
-        let seriesCollection = [];
+        let seriesCollection: any[] = [];
         let seriesNames = this.getUniqueSeriesNames(data, seriesIdent);
+        const ident: string = dataIdentity ? dataIdentity : '';
 
         for (let uniqueName of seriesNames) {
             let series = {name: uniqueName};
-            let dataFunction: number;
+            let dataFunction = 0;
             for (let obj of data) {
                 if (this.getElementNameAtLevel(seriesIdent, obj) === uniqueName) {
-                    let dataElement = Number(obj[dataIdentity]);
+                    let dataElement = Number(obj[ident]);
 
                     if (calcFunction === DataFunctionEnum.COUNT ||
                         calcFunction === DataFunctionEnum.SUM) {
@@ -138,7 +139,7 @@ export class ChartUtils {
     */
 
     public getUniqueSeriesNames(data: Object[], seriesIdent: string[]) {
-        let seriesNames = [];
+        let seriesNames: any[] = [];
         for (let obj of data) {
             let currentSeriesName = this.getElementNameAtLevel(seriesIdent, obj);
             if (seriesNames.indexOf(currentSeriesName) === -1) {
