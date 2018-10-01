@@ -17,7 +17,7 @@
 
     "stripInternal": true,
     "inlineSources": true,
-    "module": "es2015",
+    "module": "CommonJS",
 //    "moduleResolution": "node"
 
     "strict": true,

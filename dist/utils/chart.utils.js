@@ -1,18 +1,20 @@
-import { DataFunctionEnum } from "../enum/data-function.enum";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var data_function_enum_1 = require("../enum/data-function.enum");
 var ChartUtils = (function () {
     function ChartUtils() {
     }
     ChartUtils.prototype.getCountData = function (data, seriesIdent) {
-        return this.getDataByFunction(data, seriesIdent, DataFunctionEnum.COUNT);
+        return this.getDataByFunction(data, seriesIdent, data_function_enum_1.DataFunctionEnum.COUNT);
     };
     ChartUtils.prototype.getSumData = function (data, seriesIdent, dataIdent) {
-        return this.getDataByFunction(data, seriesIdent, DataFunctionEnum.SUM, dataIdent);
+        return this.getDataByFunction(data, seriesIdent, data_function_enum_1.DataFunctionEnum.SUM, dataIdent);
     };
     ChartUtils.prototype.getMinData = function (data, seriesIdent, dataIdent) {
-        return this.getDataByFunction(data, seriesIdent, DataFunctionEnum.MINIMUM, dataIdent);
+        return this.getDataByFunction(data, seriesIdent, data_function_enum_1.DataFunctionEnum.MINIMUM, dataIdent);
     };
     ChartUtils.prototype.getMaxData = function (data, seriesIdent, dataIdent) {
-        return this.getDataByFunction(data, seriesIdent, DataFunctionEnum.MAXIMUM, dataIdent);
+        return this.getDataByFunction(data, seriesIdent, data_function_enum_1.DataFunctionEnum.MAXIMUM, dataIdent);
     };
     ChartUtils.prototype.getSeriesData = function (data, seriesIdent, dataIdent, seriesPointIdent, seriesPointElements, highlight) {
         var dataArray = [];
@@ -72,19 +74,19 @@ var ChartUtils = (function () {
                 var obj = data_2[_a];
                 if (this.getElementNameAtLevel(seriesIdent, obj) === uniqueName) {
                     var dataElement = Number(obj[ident]);
-                    if (calcFunction === DataFunctionEnum.COUNT ||
-                        calcFunction === DataFunctionEnum.SUM) {
+                    if (calcFunction === data_function_enum_1.DataFunctionEnum.COUNT ||
+                        calcFunction === data_function_enum_1.DataFunctionEnum.SUM) {
                         if (!dataFunction) {
                             dataFunction = 0;
                         }
                     }
-                    if (calcFunction === DataFunctionEnum.COUNT) {
+                    if (calcFunction === data_function_enum_1.DataFunctionEnum.COUNT) {
                         dataFunction++;
                     }
-                    else if (calcFunction === DataFunctionEnum.SUM) {
+                    else if (calcFunction === data_function_enum_1.DataFunctionEnum.SUM) {
                         dataFunction = dataFunction + dataElement;
                     }
-                    else if (calcFunction === DataFunctionEnum.MAXIMUM) {
+                    else if (calcFunction === data_function_enum_1.DataFunctionEnum.MAXIMUM) {
                         if (!dataFunction) {
                             dataFunction = dataElement;
                         }
@@ -92,7 +94,7 @@ var ChartUtils = (function () {
                             dataFunction = dataElement > dataFunction ? dataElement : dataFunction;
                         }
                     }
-                    else if (calcFunction === DataFunctionEnum.MINIMUM) {
+                    else if (calcFunction === data_function_enum_1.DataFunctionEnum.MINIMUM) {
                         if (!dataFunction) {
                             dataFunction = dataElement;
                         }
@@ -157,5 +159,5 @@ var ChartUtils = (function () {
     };
     return ChartUtils;
 }());
-export { ChartUtils };
+exports.ChartUtils = ChartUtils;
 //# sourceMappingURL=chart.utils.js.map
