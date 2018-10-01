@@ -1,7 +1,5 @@
-import {Injectable} from '@angular/core';
 import {DataFunctionEnum} from "../enum/data-function.enum";
 
-@Injectable()
 export class ChartUtils {
 
     constructor() {
