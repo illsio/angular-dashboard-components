@@ -17,7 +17,7 @@
 
     "stripInternal": true,
     "inlineSources": true,
-    "module": "CommonJS",
+    "module": "System",
 //    "moduleResolution": "node"
 
     "strict": true,
