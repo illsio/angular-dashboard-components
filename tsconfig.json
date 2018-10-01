@@ -4,25 +4,23 @@
 
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "es5",
-//    "module": "commonjs",
+    "target": "es6",
+
     "moduleResolution": "node",
     "removeComments": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "outDir": "./dist",
     "declaration": true,
     "noImplicitAny": false,
 //    "noLib": false,
 
-
     "stripInternal": true,
-    "inlineSources": true,
-    "module": "System",
+    "inlineSources": false,
+    "module": "es2015",
 //    "moduleResolution": "node"
 
     "strict": true,
     "lib": ["es2015", "dom"]
-
   },
 
   "files": [
