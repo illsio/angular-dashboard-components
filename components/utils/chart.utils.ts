@@ -1,6 +1,9 @@
 import {DataFunctionEnum} from "../enum/data-function.enum";
+import * as Highcharts from 'highcharts';
 
 export class ChartUtils {
+
+    public colors;
 
     constructor() {
     }
@@ -33,9 +36,10 @@ export class ChartUtils {
     *   @highlight name of the series to highlight in the chart
     */
 
-    getSeriesData(data: Object[], seriesIdent: string, dataIdent, seriesPointIdent, seriesPointElements: string[], highlight?: string) {
+    getSeriesData(data: Object[], seriesIdent: string, dataIdent, seriesPointIdent, seriesPointElements: string[], highlight?: string, colorByPoint?: boolean) {
         let dataArray: any[] = [];
         let seriesNames = this.getUniqueSeriesNames(data, [seriesIdent]);
+        let colorindex = 0;
 
         for (let uniqueName of seriesNames) {
             let series = {name: uniqueName};
@@ -61,6 +65,11 @@ export class ChartUtils {
 
             if (series.name == highlight) {
                 series["color"] = '#434348';
+            } else {
+                if (colorByPoint && this.colors) {
+                    series["color"] = this.colors[colorindex];
+                    colorindex++;
+                }
             }
 
             // In this case we only have one Series (in this case the )
@@ -183,5 +192,9 @@ export class ChartUtils {
 
 
         return string.charAt(0).toUpperCase() + string.slice(1)
+    }
+
+    setPresetColors(value: string[]) {
+        this.colors = value;
     }
 }
